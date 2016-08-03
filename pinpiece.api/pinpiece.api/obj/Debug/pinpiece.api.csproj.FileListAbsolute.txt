@@ -17,3 +17,5 @@ D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Driver.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Bson.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Driver.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\obj\Debug\pinpiece.api.csprojResolveAssemblyReference.cache
+D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\NLog.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\NLog.xml

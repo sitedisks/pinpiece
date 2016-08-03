@@ -32,3 +32,5 @@ D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\MongoDB.Driver.Core.dl
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\pinpiece.api.pdb
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\MongoDB.Driver.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\MongoDB.Bson.xml
+D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\NLog.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\NLog.xml

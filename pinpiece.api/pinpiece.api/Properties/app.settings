@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="pinpiece.api.Properties" GeneratedClassName="app">
+  <Profiles />
+  <Settings>
+    <Setting Name="mlabconnection" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mongodb://mongopin-dev:qwerty@ds031835.mlab.com:31835/heroku_dfqn70ws</Value>
+    </Setting>
+    <Setting Name="numberOfPins" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

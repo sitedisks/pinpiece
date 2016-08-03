@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using pinpiece.api.Properties;
 using MongoDB.Bson;
 using NLog;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace pinpiece.api.Services
 {
@@ -91,7 +92,8 @@ namespace pinpiece.api.Services
             return 0;
         }
 
-        public async Task<Pin> InsertPinPostData(Pin pin) {
+        public async Task<Pin> InsertPinPostData(Pin pin)
+        {
             try
             {
                 _client = new MongoClient(app.Default.mlabconnection);
@@ -99,8 +101,8 @@ namespace pinpiece.api.Services
                 var collection = _mongoDb.GetCollection<BsonDocument>("pin");
 
                 var record = new BsonDocument {
-                    {"pinid", pin.UserId},
-                    {"userid", pin.Token},
+                    {"pinid", pin.PinId},
+                    {"userid", pin.UserId},
                     {"token", pin.Token},
                     {"gender", pin.Gender},
                     {"coord", new BsonArray { pin.Coord.lng, pin.Coord.lat } },
@@ -118,8 +120,47 @@ namespace pinpiece.api.Services
             return null;
         }
 
-        public async Task<IList<Pin>> RetreiveNearByPins(Coord coord) {
-            return null;
+        public async Task<IList<Pin>> RetreiveNearByPins(Coord coord)
+        {
+
+            IList<Pin> nearPins = new List<Pin>();
+
+            try
+            {
+                _client = new MongoClient(app.Default.mlabconnection);
+                _mongoDb = _client.GetDatabase("heroku_dfqn70ws");
+                var collection = _mongoDb.GetCollection<BsonDocument>("pin");
+
+                var gp = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(coord.lng, coord.lat));
+                var filter = Builders<BsonDocument>.Filter.Near("coord", gp, app.Default.howClose);
+                var result = await collection.Find(filter).Limit(app.Default.numberOfPins).ToListAsync();
+
+                foreach (var pin in result)
+                {
+                    Pin newPin = new Pin
+                    {
+                        PinId = (Int64)pin["pinid"],
+                        UserId = (Int64)pin["userid"],
+                        Token = pin["token"].ToString(),
+                        Gender = pin["gender"].ToString(),
+                        CreatedDate = (DateTime)pin["timestamp"],
+                        IsPrivate = (bool)pin["private"],
+                        Coord = new Coord {
+                            lng = pin["coord"].AsBsonArray[0].ToDouble(),
+                            lat = pin["coord"].AsBsonArray[1].ToDouble(),
+                        }
+                    };
+
+                    nearPins.Add(newPin);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error at " + DateTime.UtcNow + " >>> ", ex.Message);
+            }
+
+            return nearPins;
         }
 
     }

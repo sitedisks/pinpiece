@@ -40,5 +40,14 @@ namespace pinpiece.api.Properties {
                 return ((int)(this["numberOfPins"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int howClose {
+            get {
+                return ((int)(this["howClose"]));
+            }
+        }
     }
 }

@@ -3,3 +3,8 @@ D:\Git\pinpiece\pinpiece.api\pinpiece.web\bin\pinpiece.web.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.web\bin\pinpiece.web.pdb
 D:\Git\pinpiece\pinpiece.api\pinpiece.web\obj\Debug\pinpiece.web.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.web\obj\Debug\pinpiece.web.pdb
+C:\Git\pinpiece\pinpiece.api\pinpiece.web\bin\pinpiece.web.dll.config
+C:\Git\pinpiece\pinpiece.api\pinpiece.web\bin\pinpiece.web.dll
+C:\Git\pinpiece\pinpiece.api\pinpiece.web\bin\pinpiece.web.pdb
+C:\Git\pinpiece\pinpiece.api\pinpiece.web\obj\Debug\pinpiece.web.dll
+C:\Git\pinpiece\pinpiece.api\pinpiece.web\obj\Debug\pinpiece.web.pdb

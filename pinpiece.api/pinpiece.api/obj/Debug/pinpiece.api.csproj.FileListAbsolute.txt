@@ -16,9 +16,11 @@ D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Driver.Core.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Driver.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Bson.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\MongoDB.Driver.xml
-D:\Git\pinpiece\pinpiece.api\pinpiece.api\obj\Debug\pinpiece.api.csprojResolveAssemblyReference.cache
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\NLog.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\NLog.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\Microsoft.Web.Infrastructure.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\Swashbuckle.Core.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\WebActivatorEx.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\System.Web.Cors.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\System.Web.Http.Cors.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api\bin\System.Web.Http.Cors.xml

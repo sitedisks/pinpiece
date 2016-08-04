@@ -35,3 +35,6 @@ D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\MongoDB.Bson.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\NLog.dll
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\NLog.xml
 D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\Swashbuckle.Core.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Http.Cors.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Cors.dll
+D:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Http.Cors.xml

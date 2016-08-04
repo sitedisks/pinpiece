@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinpiece.api.Tests", "pinpi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinpiece.api", "pinpiece.api\pinpiece.api.csproj", "{EE0402CF-D44C-4E78-9327-F152D482D625}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinpiece.web", "pinpiece.web\pinpiece.web.csproj", "{DA8380EA-8B2C-4D72-892C-706943C278EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EE0402CF-D44C-4E78-9327-F152D482D625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE0402CF-D44C-4E78-9327-F152D482D625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE0402CF-D44C-4E78-9327-F152D482D625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8380EA-8B2C-4D72-892C-706943C278EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8380EA-8B2C-4D72-892C-706943C278EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8380EA-8B2C-4D72-892C-706943C278EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8380EA-8B2C-4D72-892C-706943C278EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

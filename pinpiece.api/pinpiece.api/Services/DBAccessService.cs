@@ -7,6 +7,7 @@ using pinpiece.api.Properties;
 using MongoDB.Bson;
 using NLog;
 using MongoDB.Driver.GeoJsonObjectModel;
+using pinpiece.api.Models.Dto;
 
 namespace pinpiece.api.Services
 {
@@ -78,7 +79,8 @@ namespace pinpiece.api.Services
                 var record = new BsonDocument {
                     {"userid", data.UserId},
                     {"token", data.Token},
-                    {"coord", new BsonArray { data.Coord.lng, data.Coord.lat } }  
+                    {"coord", new BsonArray { data.Coord.lng, data.Coord.lat } },
+                    {"timestamp", DateTime.UtcNow }
                 };
 
                 await collection.InsertOneAsync(record);
@@ -92,8 +94,9 @@ namespace pinpiece.api.Services
             return 0;
         }
 
-        public async Task<Pin> InsertPinPostData(Pin pin)
+        public async Task<dtoPin> InsertPinPostData(Pin pin)
         {
+            dtoPin dtoPin = new dtoPin();
             try
             {
                 _client = new MongoClient(app.Default.mlabconnection);
@@ -106,24 +109,34 @@ namespace pinpiece.api.Services
                     {"token", pin.Token},
                     {"gender", pin.Gender},
                     {"coord", new BsonArray { pin.Coord.lng, pin.Coord.lat } },
-                    {"timestamp", pin.CreatedDate},
+                    {"timestamp", DateTime.UtcNow},
                     {"private", pin.IsPrivate}
                 };
 
                 await collection.InsertOneAsync(record);
-                return pin;
+             
+                // dtoPin (mySql) read dtoPin from mySql by PinId
+                dtoPin.Id = pin.PinId;
+                dtoPin.UserId = pin.UserId;
+                dtoPin.Token = pin.Token;
+                dtoPin.Latitude = pin.Coord.lat;
+                dtoPin.Longitude = pin.Coord.lng;
+                dtoPin.ImageUri = "http://www.pinpiece.com/image/blahblahblah";
+                dtoPin.Text = "This is testing data, should load from MySql";
+                dtoPin.IsPrivate = pin.IsPrivate;
+                dtoPin.CreatedDateTime = pin.CreatedDate;
             }
             catch (Exception ex)
             {
                 logger.Error("Error at " + DateTime.UtcNow + " >>> ", ex.Message);
             }
-            return null;
+            return dtoPin;
         }
 
-        public async Task<IList<Pin>> RetreiveNearByPins(Coord coord)
+        public async Task<IList<dtoPin>> RetreiveNearByPins(Coord coord)
         {
 
-            IList<Pin> nearPins = new List<Pin>();
+            IList<dtoPin> nearPins = new List<dtoPin>();
 
             try
             {
@@ -137,21 +150,19 @@ namespace pinpiece.api.Services
 
                 foreach (var pin in result)
                 {
-                    Pin newPin = new Pin
-                    {
-                        PinId = (Int64)pin["pinid"],
+                    dtoPin dtoPin = new dtoPin {
+                        Id = (Int64)pin["pinid"],
                         UserId = (Int64)pin["userid"],
                         Token = pin["token"].ToString(),
-                        Gender = pin["gender"].ToString(),
-                        CreatedDate = (DateTime)pin["timestamp"],
+                        Longitude =  pin["coord"].AsBsonArray[0].ToDouble(),
+                        Latitude = pin["coord"].AsBsonArray[1].ToDouble(),
+                        ImageUri = "http://www.pinpiece.com/image/blahblahblah",
+                        Text = "This is testing data, should load from MySql",
                         IsPrivate = (bool)pin["private"],
-                        Coord = new Coord {
-                            lng = pin["coord"].AsBsonArray[0].ToDouble(),
-                            lat = pin["coord"].AsBsonArray[1].ToDouble(),
-                        }
+                        CreatedDateTime = (DateTime)pin["timestamp"]
                     };
 
-                    nearPins.Add(newPin);
+                    nearPins.Add(dtoPin);
                 }
 
             }

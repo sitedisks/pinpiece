@@ -4,6 +4,7 @@ using pinpiece.api.Services;
 using pinpiece.api.Models;
 using System.Collections.Generic;
 using System;
+using pinpiece.api.Models.Dto;
 
 namespace pinpiece.api.Tests
 {
@@ -23,9 +24,9 @@ namespace pinpiece.api.Tests
         [TestMethod]
         public async Task TestInsertReload() { 
             Reload testRecord = new Reload{
-                UserId = 322331423,
-                Token= "sdnhfwsesefsghtdsfef",
-                Coord = new Coord{ lng = 144.96653, lat = -37.81756 }
+                UserId = 242344234,
+                Token= "sdfsdfheisefhie",
+                Coord = new Coord{ lng = 144.966222, lat = -37.8175323 }
             };
 
             int result = await srv.InsertReloadData(testRecord);
@@ -35,16 +36,16 @@ namespace pinpiece.api.Tests
         [TestMethod]
         public async Task TestInsertPin() {
             Pin testPin = new Pin {
-                PinId = 32322,
-                UserId = 45235342,
-                Token = "ghdf-ssfed-sheih-fhg",
+                PinId = 324234,
+                UserId = 3424234234,
+                Token = "deas-3hhr-seef-sef",
                 Gender = "F",
-                Coord = new Coord { lng = 144.963223, lat = -37.84422 },
+                Coord = new Coord { lng = 144.963226622, lat = -37.8442124 },
                 CreatedDate = DateTime.UtcNow,
                 IsPrivate = false
             };
 
-            Pin result = await srv.InsertPinPostData(testPin);
+            dtoPin result = await srv.InsertPinPostData(testPin);
 
             Assert.IsNotNull(result);
         }
@@ -56,7 +57,7 @@ namespace pinpiece.api.Tests
                 lat = -37.84222
             };
 
-            IList<Pin> list = await srv.RetreiveNearByPins(coord);
+            IList<dtoPin> list = await srv.RetreiveNearByPins(coord);
 
             Assert.IsNotNull(list);
         }

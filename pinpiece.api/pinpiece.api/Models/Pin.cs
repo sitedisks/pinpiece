@@ -12,7 +12,7 @@ namespace pinpiece.api.Models
         public string Token { get; set; }
         public string Gender { get; set; }
         public Coord Coord { get; set; }
-        public DateTime CreatedDate { get; set; }
         public bool IsPrivate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

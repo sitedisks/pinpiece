@@ -11,6 +11,8 @@ namespace pinpiece.api
     {
         protected void Application_Start()
         {
+            var config = GlobalConfiguration.Configuration;
+            SwaggerConfig.Register(config);
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

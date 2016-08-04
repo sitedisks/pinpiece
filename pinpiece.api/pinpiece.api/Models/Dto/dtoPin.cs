@@ -7,8 +7,8 @@ namespace pinpiece.api.Models.Dto
 {
     public class dtoPin
     {
-        public Int64 Id { get; set; }
-        public Int64 UserId { get; set; }
+        public string Id { get; set; }
+        public string UserId { get; set; }
         public string Token { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

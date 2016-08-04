@@ -22,6 +22,13 @@ namespace pinpiece.api.Tests
         }
 
         [TestMethod]
+        public async Task TestReturnAllPins() {
+            IList<dtoPin> list = await srv.RetreiveAllPins();
+
+            Assert.IsNotNull(list);
+        }
+
+        [TestMethod]
         public async Task TestInsertReload() { 
             Reload testRecord = new Reload{
                 UserId = 242344234,

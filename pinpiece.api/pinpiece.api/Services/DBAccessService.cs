@@ -68,6 +68,44 @@ namespace pinpiece.api.Services
             return restaurantBook;
         }
 
+        public async Task<IList<dtoPin>> RetreiveAllPins()
+        {
+            IList<dtoPin> allPins = new List<dtoPin>();
+
+            try
+            {
+                _client = new MongoClient(app.Default.mlabconnection);
+                _mongoDb = _client.GetDatabase("heroku_dfqn70ws");
+                var collection = _mongoDb.GetCollection<BsonDocument>("pin");
+
+                var result = await collection.AsQueryable().ToListAsync();
+
+                foreach (var pin in result)
+                {
+                    dtoPin dtoPin = new dtoPin
+                    {
+                        Id = pin["pinid"].ToString(),
+                        UserId = pin["userid"].ToString(),
+                        Token = pin["token"].ToString(),
+                        Longitude = pin["coord"].AsBsonArray[0].ToDouble(),
+                        Latitude = pin["coord"].AsBsonArray[1].ToDouble(),
+                        ImageUri = "http://www.pinpiece.com/image/blahblahblah",
+                        Text = "This is testing data, should load from MySql",
+                        IsPrivate = (bool)pin["private"],
+                        CreatedDateTime = (DateTime)pin["timestamp"]
+                    };
+
+                    allPins.Add(dtoPin);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error at " + DateTime.UtcNow + " >>> ", ex.Message);
+            }
+
+            return allPins;
+        }
+
         public async Task<int> InsertReloadData(Reload data)
         {
             try
@@ -114,10 +152,10 @@ namespace pinpiece.api.Services
                 };
 
                 await collection.InsertOneAsync(record);
-             
+
                 // dtoPin (mySql) read dtoPin from mySql by PinId
-                dtoPin.Id = pin.PinId;
-                dtoPin.UserId = pin.UserId;
+                dtoPin.Id = pin.PinId.ToString();
+                dtoPin.UserId = pin.UserId.ToString();
                 dtoPin.Token = pin.Token;
                 dtoPin.Latitude = pin.Coord.lat;
                 dtoPin.Longitude = pin.Coord.lng;
@@ -135,7 +173,6 @@ namespace pinpiece.api.Services
 
         public async Task<IList<dtoPin>> RetreiveNearByPins(Coord coord)
         {
-
             IList<dtoPin> nearPins = new List<dtoPin>();
 
             try
@@ -150,11 +187,12 @@ namespace pinpiece.api.Services
 
                 foreach (var pin in result)
                 {
-                    dtoPin dtoPin = new dtoPin {
-                        Id = (Int64)pin["pinid"],
-                        UserId = (Int64)pin["userid"],
+                    dtoPin dtoPin = new dtoPin
+                    {
+                        Id = pin["pinid"].ToString(),
+                        UserId = pin["userid"].ToString(),
                         Token = pin["token"].ToString(),
-                        Longitude =  pin["coord"].AsBsonArray[0].ToDouble(),
+                        Longitude = pin["coord"].AsBsonArray[0].ToDouble(),
                         Latitude = pin["coord"].AsBsonArray[1].ToDouble(),
                         ImageUri = "http://www.pinpiece.com/image/blahblahblah",
                         Text = "This is testing data, should load from MySql",

@@ -19,7 +19,7 @@ namespace pinpiece.api.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpPost, Route("reload")]
-        public async Task<IHttpActionResult> Retreive([FromBody] Reload reload)
+        public async Task<IHttpActionResult> Reload([FromBody] Reload reload)
         {
             IList<dtoPin> nearPins = new List<dtoPin>();
             Coord coord = new Coord
@@ -56,6 +56,22 @@ namespace pinpiece.api.Controllers
 
 
             return Ok(dtoPin);
+        }
+
+        [HttpGet, Route("all")]
+        public async Task<IHttpActionResult> RetreiveAll() {
+            IList<dtoPin> allPins = new List<dtoPin>();
+
+            try {
+                allPins = await srv.RetreiveAllPins();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error at " + DateTime.UtcNow + " >>> ", ex.Message);
+            }
+
+            return Ok(allPins);
+
         }
 
     }

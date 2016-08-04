@@ -9,7 +9,7 @@ function initialize() {
     var endpoint = "http://pinpieceapi.azurewebsites.net";
 
     var mapOptions = {
-        zoom: 15,
+        zoom: 13,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -56,25 +56,27 @@ function initialize() {
 
         $.post(endpoint + "/mongo/reload", reload, function (data) {
 
-            for (i = 0; i < data.length; i++) {
-                addMarker(data[i]);
+            if (data.length > 0) {
+                for (i = 0; i < data.length; i++) {
+                    addMarker(data[i]);
+                }
+                map.setCenter(bounds.getCenter());
+                map.fitBounds(bounds);
+                // map.setZoom(map.getZoom() - 1);
             }
-
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds);
-            // map.setZoom(map.getZoom() - 1);
+          
         });
 
     });
 
     // initial screen 
-    /*
-    $.get(endpoint + "/mongo/retreive", function (data) {
+    
+    $.get(endpoint + "/mongo/all", function (data) {
         for (i = 0; i < data.length; i++) {
             addMarker(data[i]);
         }
     });
-    */
+    
 
     // add markers (pin)
     function addMarker(pin) {

@@ -4,7 +4,7 @@ namespace pinpiece.api.Models.Dto
 {
     public class dtoUser
     {
-        public Int64 Id { get; set; }
+        public string Id { get; set; }
         public string DisplayName { get; set; }
         public string Gender { get; set; }
         public string MobileNumber { get; set; }

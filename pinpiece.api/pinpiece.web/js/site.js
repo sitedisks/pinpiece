@@ -3,7 +3,10 @@ $(document).ready(initialize);
 
 function initialize() {
 
-    var latlng = new google.maps.LatLng(-37.813611, 144.963056); // initial melbourne
+    var currentLat = -37.813611, currentLng = 144.963056;
+    var UserId = 88888, Token = 'cwancwancwancwan0';
+
+    var latlng = new google.maps.LatLng(currentLat, currentLng); // initial melbourne
     var howclose = 1000;
     //var endpoint = "http://localhost:698";
     var endpoint = "http://pinpieceapi.azurewebsites.net";
@@ -32,25 +35,47 @@ function initialize() {
         position: latlng,
         map: map,
         draggable: true,
-        icon: pinImage
+        icon: pinImage,
+        infowindow: infowindow
     });
+
+    // webapi add button to infowindow
+    var content = document.createElement('div');
+    content.innerHTML = '<h4>Move me and Pin Message : ></h4><br/><textarea class="form-control" id="pin_message" rows="4" cols="50"></textarea><br/>';
+    var button = content.appendChild(document.createElement('input'));
+    button.type = 'button';
+    button.value = 'Pin It!';
+    button.classList.add('btn');
+    button.classList.add('btn-success');
+
+    google.maps.event.addDomListener(button, 'click', function () {
+        postPin();
+    });
+    // end webapi button
+
+    google.maps.event.addListener(meMarker, 'click', function () {
+        this.infowindow.setContent(content);
+        this.infowindow.open(map, this);
+    });
+
+
     // end current pin blue
 
     // drag - relocation
     google.maps.event.addListener(meMarker, "dragend", function (event) {
         bounds = new google.maps.LatLngBounds();
-        var lat = event.latLng.lat();
-        var lng = event.latLng.lng();
-        toastr.success('Lat: ' + lat + ', Lng:' + lng);
+        currentLat = event.latLng.lat();
+        currentLng = event.latLng.lng();
+        toastr.success('Lat: ' + currentLat + ', Lng:' + currentLng);
 
         clearOverlays(); // clean markers
 
         var reload = {
-            "UserId": 23232322,
-            "Token": "cwancwancwancwan0",
+            "UserId": UserId,
+            "Token": Token,
             "Coord": {
-                "lng": lng,
-                "lat": lat
+                "lng": currentLng,
+                "lat": currentLat
             }
         };
 
@@ -61,22 +86,22 @@ function initialize() {
                     addMarker(data[i]);
                 }
                 map.setCenter(bounds.getCenter());
-                map.fitBounds(bounds);
+                //map.fitBounds(bounds);
                 // map.setZoom(map.getZoom() - 1);
             }
-          
+
         });
 
     });
 
     // initial screen 
-    
+
     $.get(endpoint + "/mongo/all", function (data) {
         for (i = 0; i < data.length; i++) {
             addMarker(data[i]);
         }
     });
-    
+
 
     // add markers (pin)
     function addMarker(pin) {
@@ -108,6 +133,44 @@ function initialize() {
             markersArray[i].setMap(null);
         }
         markersArray.length = 0;
+    }
+
+    function postPin() {
+        var message = $('#pin_message').val();
+        //toastr.warning('Lat: ' + currentLat + ', Lng:' + currentLng, message);
+        var pin = {
+            "PinId": randomPinId(),
+            "UserId": UserId,
+            "Token": Token,
+            "Gender": randomGender(),
+            "Coord": {
+                "lng": currentLng,
+                "lat": currentLat
+            },
+            "IsPrivate": true
+        };
+
+        $.post(endpoint + "/mongo/newpin", pin, function (data) {
+
+            toastr.success('New Pin Added!');
+            addMarker(data);
+        });
+
+    }
+
+
+    // random values
+    function randomPinId() {
+        return parseInt(Math.random() * 1000000);
+    }
+
+    function randomGender() {
+        if (parseInt(Math.random() * 10 % 2) == 1) {
+            return 'F';
+        }
+        else {
+            return 'M';
+        }
     }
 
 }

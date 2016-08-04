@@ -130,6 +130,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>app.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Properties\PublishProfiles\pinpieceAPI - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\pinpieceAPI - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

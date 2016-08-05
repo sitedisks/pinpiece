@@ -1,3 +1,5 @@
 pinpiece.api/pinpiece.api/obj/
 pinpiece.api/pinpiece.api.Tests/obj/
 pinpiece.api/pinpiece.web/bower_components/
+pinpiece.api/pinpiece.web/obj/
+pinpiece.api/pinpiece.api.Tests/bin/

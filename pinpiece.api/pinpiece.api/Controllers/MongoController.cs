@@ -31,7 +31,7 @@ namespace pinpiece.api.Controllers
             try
             {
                 await srv.InsertReloadData(reload);
-                nearPins = await srv.RetreiveNearByPins(coord);
+                nearPins = await srv.RetreiveNearByWithDistancePins(coord);
             }
             catch (Exception ex)
             {

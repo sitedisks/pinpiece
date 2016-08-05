@@ -59,12 +59,26 @@ namespace pinpiece.api.Tests
 
         [TestMethod]
         public async Task TestNearPin() {
-            Coord coord = new Coord { 
-                lng = 144.96333, 
-                lat = -37.84222
+            Coord coord = new Coord {
+                lng = 144.96116772485357,
+                lat = -37.8137466139751
             };
 
             IList<dtoPin> list = await srv.RetreiveNearByPins(coord);
+
+            Assert.IsNotNull(list);
+        }
+
+        [TestMethod]
+        public async Task TestNearPinWithDistance()
+        {
+            Coord coord = new Coord
+            {
+                lng = 144.96116772485357,
+                lat = -37.8137466139751
+            };
+
+            IList<dtoPin> list = await srv.RetreiveNearByWithDistancePins(coord);
 
             Assert.IsNotNull(list);
         }

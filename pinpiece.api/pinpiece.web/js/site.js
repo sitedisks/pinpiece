@@ -8,8 +8,8 @@ function initialize() {
 
     var latlng = new google.maps.LatLng(currentLat, currentLng); // initial melbourne
     var howclose = 1000;
-    //var endpoint = "http://localhost:698";
-    var endpoint = "http://pinpieceapi.azurewebsites.net";
+    var endpoint = "http://localhost:2325";
+    //var endpoint = "http://pinpieceapi.azurewebsites.net";
 
     var mapOptions = {
         zoom: 13,
@@ -109,7 +109,10 @@ function initialize() {
         var markerLatLng = new google.maps.LatLng(pin.Latitude, pin.Longitude);
         bounds.extend(markerLatLng);
 
-        var tipHtml = "<h4>Pin Piece:</h4> " + pin.UserId + "<h5>Token:</h5><br/>Text: " + pin.Token + "What been told: " + pin.Text;
+        var tipHtml = "<h5>Pin Piece:</h5> User:" + pin.UserId + "<h5>Token:" + pin.Token + "</h5><br/>What been told: " + pin.Text;
+        if (pin.Distance) {
+            tipHtml += "<h4>Distance: " + pin.Distance + " M</h4>";
+        }
 
         var marker = new google.maps.Marker({
             position: markerLatLng,

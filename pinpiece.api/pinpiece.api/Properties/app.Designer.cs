@@ -44,9 +44,9 @@ namespace pinpiece.api.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int howClose {
+        public int maxDistance {
             get {
-                return ((int)(this["howClose"]));
+                return ((int)(this["maxDistance"]));
             }
         }
     }

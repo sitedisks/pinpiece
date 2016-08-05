@@ -15,6 +15,7 @@ namespace pinpiece.api.Models.Dto
         public string ImageUri { get; set; }
         public string Text { get; set; }
         public bool IsPrivate { get; set; }
+        public double? Distance { get; set; }
         public DateTime CreatedDateTime { get; set; }
     }
 }

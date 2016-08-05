@@ -182,7 +182,7 @@ namespace pinpiece.api.Services
                 var collection = _mongoDb.GetCollection<BsonDocument>("pin");
 
                 var gp = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(coord.lng, coord.lat));
-                var filter = Builders<BsonDocument>.Filter.Near("coord", gp, app.Default.howClose);
+                var filter = Builders<BsonDocument>.Filter.Near("coord", gp, app.Default.maxDistance);
                 var result = await collection.Find(filter).Limit(app.Default.numberOfPins).ToListAsync();
 
                 foreach (var pin in result)
@@ -197,6 +197,59 @@ namespace pinpiece.api.Services
                         ImageUri = "http://www.pinpiece.com/image/blahblahblah",
                         Text = "This is testing data, should load from MySql",
                         IsPrivate = (bool)pin["private"],
+                        CreatedDateTime = (DateTime)pin["timestamp"]
+                    };
+
+                    nearPins.Add(dtoPin);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error at " + DateTime.UtcNow + " >>> ", ex.Message);
+            }
+
+            return nearPins;
+        }
+
+        public async Task<IList<dtoPin>> RetreiveNearByWithDistancePins(Coord coord)
+        {
+            IList<dtoPin> nearPins = new List<dtoPin>();
+
+            try
+            {
+                _client = new MongoClient(app.Default.mlabconnection);
+                _mongoDb = _client.GetDatabase("heroku_dfqn70ws");
+                var collection = _mongoDb.GetCollection<BsonDocument>("pin");
+
+                var pipeline = new List<BsonDocument>();
+                var geoNearOptions = new BsonDocument {
+                    { "near", new BsonDocument {
+                        { "type", "Point" }, 
+                        { "coordinates", new BsonArray {coord.lng , coord.lat} },
+                        } },
+                    { "distanceField", "distance" },
+                    { "maxDistance", app.Default.maxDistance }, 
+                    { "num", app.Default.numberOfPins },  
+                    { "spherical" , true }
+                };
+                pipeline.Add(new BsonDocument { { "$geoNear", geoNearOptions } });
+
+                var result = await collection.Aggregate<BsonDocument>(pipeline).ToListAsync();
+
+                foreach (var pin in result)
+                {
+                    dtoPin dtoPin = new dtoPin
+                    {
+                        Id = pin["pinid"].ToString(),
+                        UserId = pin["userid"].ToString(),
+                        Token = pin["token"].ToString(),
+                        Longitude = pin["coord"].AsBsonArray[0].ToDouble(),
+                        Latitude = pin["coord"].AsBsonArray[1].ToDouble(),
+                        ImageUri = "http://www.pinpiece.com/image/blahblahblah",
+                        Text = "This is testing data, should load from MySql",
+                        IsPrivate = (bool)pin["private"],
+                        Distance = (double)pin["distance"],
                         CreatedDateTime = (DateTime)pin["timestamp"]
                     };
 

@@ -23,7 +23,6 @@ C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\MongoDB.Driver.Core.dl
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Cors.dll
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\pinpiece.api.pdb
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\Newtonsoft.Json.xml
-C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Net.Http.Formatting.xml
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Helpers.xml
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Http.xml
 C:\Git\pinpiece\pinpiece.api\pinpiece.api.Tests\bin\Debug\System.Web.Http.WebHost.xml

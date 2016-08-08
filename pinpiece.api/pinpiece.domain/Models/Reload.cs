@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace pinpiece.api.Models
+﻿namespace pinpiece.domain.Models
 {
+    using System;
+
     public class Reload
     {
         public Int64 UserId { get; set; }

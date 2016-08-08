@@ -1,17 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using pinpiece.api.Services;
-using pinpiece.api.Models;
-using System.Collections.Generic;
-using System;
-using pinpiece.api.Models.Dto;
-
-namespace pinpiece.api.Tests
+﻿namespace pinpiece.api.Tests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using pinpiece.domain.Models;
+    using pinpiece.domain.Dto;
+    using pinpiece.service.Interface;
+    using pinpiece.service.Services;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     [TestClass]
-    public class TestService
+    public class TestMongoService
     {
-        DBAccessService srv = new DBAccessService();
+        IMongoService srv = new MongoService();
 
         [TestMethod]
         public async Task TestmLabConnection()

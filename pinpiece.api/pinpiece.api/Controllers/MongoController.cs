@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using pinpiece.api.Services;
-using System.Threading.Tasks;
-using pinpiece.api.Models.Dto;
-using pinpiece.api.Models;
-using NLog;
-
-namespace pinpiece.api.Controllers
+﻿namespace pinpiece.api.Controllers
 {
-    [RoutePrefix("mongo")]
+    using NLog;
+    using pinpiece.domain.Models;
+    using pinpiece.domain.Dto;
+    using pinpiece.service.Interface;
+    using pinpiece.service.Services;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+ 
+
+    [RoutePrefix("pins")]
     public class MongoController : ApiController
     {
-        DBAccessService srv = new DBAccessService();
+        private readonly IMongoService _svc;
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public MongoController(IMongoService svc) {
+            _svc = svc;
+        }
 
         [HttpPost, Route("reload")]
         public async Task<IHttpActionResult> Reload([FromBody] Reload reload)
@@ -30,8 +33,8 @@ namespace pinpiece.api.Controllers
 
             try
             {
-                await srv.InsertReloadData(reload);
-                nearPins = await srv.RetreiveNearByWithDistancePins(coord);
+                await _svc.InsertReloadData(reload);
+                nearPins = await _svc.RetreiveNearByWithDistancePins(coord);
             }
             catch (Exception ex)
             {
@@ -46,7 +49,7 @@ namespace pinpiece.api.Controllers
             dtoPin dtoPin = new dtoPin();
             try {
 
-                dtoPin = await srv.InsertPinPostData(pin);
+                dtoPin = await _svc.InsertPinPostData(pin);
               
             }
             catch (Exception ex)
@@ -63,7 +66,7 @@ namespace pinpiece.api.Controllers
             IList<dtoPin> allPins = new List<dtoPin>();
 
             try {
-                allPins = await srv.RetreiveAllPins();
+                allPins = await _svc.RetreiveAllPins();
             }
             catch (Exception ex)
             {

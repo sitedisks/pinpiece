@@ -1,17 +1,18 @@
-﻿using MongoDB.Driver;
-using pinpiece.api.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using pinpiece.api.Properties;
-using MongoDB.Bson;
-using NLog;
-using MongoDB.Driver.GeoJsonObjectModel;
-using pinpiece.api.Models.Dto;
-
-namespace pinpiece.api.Services
+﻿namespace pinpiece.service.Services
 {
-    public class DBAccessService
+    using Interface;
+    using MongoDB.Bson;
+    using MongoDB.Driver;
+    using MongoDB.Driver.GeoJsonObjectModel;
+    using NLog;
+    using pinpiece.domain.Models;
+    using pinpiece.domain.Dto;
+    using Properties;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    public class MongoService: IMongoService
     {
         protected static IMongoClient _client;
         protected static IMongoDatabase _mongoDb;

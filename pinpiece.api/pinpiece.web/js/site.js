@@ -168,7 +168,7 @@ function initialize() {
     }
 
     function randomGender() {
-        if (Boolean(Math.floor(Math.random() * 2))) {
+        if (parseInt(Math.random() * 10 % 2) == 1) {
             return 'F';
         }
         else {
@@ -177,54 +177,3 @@ function initialize() {
     }
 
 }
-
-// after is the test code
-/*
-var stepArray = [];
-var json = { x: 0, y: 0 };
-var z = 0;
-
-function workoutstep(xvalue, yvalue, steps) {
-    json = { x: xvalue, y: yvalue };
-    stepArray.push(json);
-    var nextjson = json;
-    while (z < steps) {
-        nextstep(nextjson);
-        stepArray.push(nextjson);
-        z++;
-    }
-    console.log(stepArray);
-}
-
-function nextstep(json) {
-    if (Boolean(Math.floor(Math.random() * 2)))
-        json.x = randomStep(json.x);
-    else
-        json.y = randomStep(json.y);
-
-    return json;
-}
-
-
-function randomStep(value) {
-    var attemptValue = value;
-    if (Boolean(Math.floor(Math.random() * 2))) {
-        attemptValue++;
-    }
-    else {
-        attemptValue--;
-    }
-
-    if (isValid(attemptValue))
-        return attemptValue;
-    else
-        return value;
-}
-
-function isValid(value) {
-
-    if (value <= 0 || value >= 6)
-        return false;
-    return true;
-}
-*/

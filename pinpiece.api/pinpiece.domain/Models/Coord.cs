@@ -1,5 +1,5 @@
 ﻿
-namespace pinpiece.api.Models
+namespace pinpiece.domain.Models
 {
     public class Coord
     {

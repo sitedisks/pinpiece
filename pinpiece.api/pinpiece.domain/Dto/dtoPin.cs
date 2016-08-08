@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace pinpiece.api.Models.Dto
+﻿namespace pinpiece.domain.Dto
 {
+    using System;
     public class dtoPin
     {
         public string Id { get; set; }

@@ -3,3 +3,11 @@ pinpiece.api/pinpiece.api.Tests/obj/
 pinpiece.api/pinpiece.web/bower_components/
 pinpiece.api/pinpiece.web/obj/
 pinpiece.api/pinpiece.api.Tests/bin/
+pinpiece.api/packages/
+pinpiece.api/pinpiece.data/obj/
+pinpiece.api/pinpiece.api/bin/
+pinpiece.api/pinpiece.domain/obj/
+pinpiece.api/pinpiece.service/bin/
+pinpiece.api/pinpiece.service/obj/
+pinpiece.api/pinpiece.domain/bin/
+pinpiece.api/pinpiece.data/bin/

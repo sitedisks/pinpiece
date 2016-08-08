@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace pinpiece.api.Models.Dto
+﻿namespace pinpiece.domain.Dto
 {
+    using System;
     public class dtoUser
     {
         public string Id { get; set; }

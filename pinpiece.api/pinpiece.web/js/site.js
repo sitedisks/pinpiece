@@ -8,8 +8,8 @@ function initialize() {
 
     var latlng = new google.maps.LatLng(currentLat, currentLng); // initial melbourne
     var howclose = 1000;
-    var endpoint = "http://localhost:2325";
-    //var endpoint = "http://pinpieceapi.azurewebsites.net";
+    //var endpoint = "http://localhost:2325";
+    var endpoint = "http://pinpieceapi.azurewebsites.net";
 
     var mapOptions = {
         zoom: 13,
@@ -79,7 +79,7 @@ function initialize() {
             }
         };
 
-        $.post(endpoint + "/mongo/reload", reload, function (data) {
+        $.post(endpoint + "/pins/reload", reload, function (data) {
 
             if (data.length > 0) {
                 for (i = 0; i < data.length; i++) {
@@ -96,7 +96,7 @@ function initialize() {
 
     // initial screen 
 
-    $.get(endpoint + "/mongo/all", function (data) {
+    $.get(endpoint + "/pins/all", function (data) {
         for (i = 0; i < data.length; i++) {
             addMarker(data[i]);
         }
@@ -153,7 +153,7 @@ function initialize() {
             "IsPrivate": true
         };
 
-        $.post(endpoint + "/mongo/newpin", pin, function (data) {
+        $.post(endpoint + "/pins/newpin", pin, function (data) {
 
             toastr.success('New Pin Added!');
             addMarker(data);
